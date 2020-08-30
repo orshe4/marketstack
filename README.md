@@ -1,10 +1,9 @@
 # marketstack API
 
-[marketstack](https://marketstack.com) is a free, JSON-based REST API for real-time, intraday and historical stock market data, supporting 125,000+ stock ticker symbols from 72+ worldwide stock exchanges. The API was built upon powerful apilayer cloud infrastructure, handling any volume with ease - from a few API requests per day all the way to millions of calls per minute, we've got you covered.
+[marketstack](https://marketstack.com) is a JSON-based REST API for real-time, intraday and historical stock market data, supporting 125,000+ stock ticker symbols from 72+ worldwide stock exchanges. The API was built upon powerful apilayer cloud infrastructure, handling any volume with ease - from a few API requests per day all the way to millions of calls per minute.
 
-Feel like trying it out? You can get a free API access key using the button below!
-
-[Sign up for free](https://marketstack.com/product) to get instant API access.
+## Give a Star! :star:
+If you like or are using this project please give it a star. Thanks!
 
 ## API Endpoints
 
@@ -22,14 +21,40 @@ Feel like trying it out? You can get a free API access key using the button belo
 * **72+ Stock Exchanges**
 * **50+ Countries**
 
-[Sign up for our cheapest Premium Plan](https://marketstack.com/signup/basic) to get access to intraday data, 10 years of historical stock data, HTTPS encryption, commercial use, and more.
-
 ## In-depth Documentation
 
 An in-depth API documentation, including interactive code examples and extensive descriptions can be found at [marketstack.com/documentation](https://marketstack.com/documentation)
 
-## Customer Support
-Need any assistance? [Get in touch with Customer Support](mailto:support@marketstack.com).
+## Usage
+
+Initialize MarketstackService
+```c#
+    var options = Options.Create(new MarketstackOptions() { ApiToken = "a49b6cfd943daff80bfd2d5103d787fb"});
+    var marketstackService = new MarketstackService(options, NullLogger<MarketstackService>.Instance);    
+```
+
+GetExchanges:
+```c#
+    var exchanges = await marketstackService.GetExchanges().ToListAsync();
+```
+
+GetExchangeStocks:
+```c#
+    var nasdaqMic = "XNAS";
+    var stocks = await _marketstackService.GetExchangeStocks(nasdaqMic)
+                .Take(400)
+                .ToListAsync();
+```    
+    
+GetStockEodBars:
+```c#
+    var appleSymbol = "AAPL";
+    var fromDate = DateTime.Now.AddDays(-200);
+    var toDate = DateTime.Now;
+    var bars = await _marketstackService.GetStockEodBars(appleSymbol, fromDate, toDate)
+        .ToListAsync();       
+```
+
 
 ## Legal
 
