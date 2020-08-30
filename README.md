@@ -31,7 +31,7 @@ An in-depth API documentation, including interactive code examples and extensive
 **GetExchangeStocks:**
 ```c#
     var nasdaqMic = "XNAS";
-    var stocks = await _marketstackService.GetExchangeStocks(nasdaqMic)
+    var stocks = await marketstackService.GetExchangeStocks(nasdaqMic)
                 .Take(400)
                 .ToListAsync();
 ```    
@@ -41,7 +41,7 @@ An in-depth API documentation, including interactive code examples and extensive
     var appleSymbol = "AAPL";
     var fromDate = DateTime.Now.AddDays(-200);
     var toDate = DateTime.Now;
-    var bars = await _marketstackService.GetStockEodBars(appleSymbol, fromDate, toDate)
+    var bars = await marketstackService.GetStockEodBars(appleSymbol, fromDate, toDate)
         .ToListAsync();       
 ```
 
