@@ -5,16 +5,6 @@
 ## Give a Star! :star:
 If you like or are using this project please give it a star. Thanks!
 
-## API Endpoints
-
-* **End-of-Day Data**
-* **Intraday Data**
-* **Historical Data**
-* **Tickers**
-* **Exchanges**
-* **Currencies**
-* **Timezones**
-
 ## Supported Stock Market Data
 
 * **125.000+ Stock Tickers**
@@ -27,18 +17,18 @@ An in-depth API documentation, including interactive code examples and extensive
 
 ## Usage
 
-Initialize MarketstackService
+**Initialize MarketstackService:**
 ```c#
     var options = Options.Create(new MarketstackOptions() { ApiToken = "a49b6cfd943daff80bfd2d5103d787fb"});
     var marketstackService = new MarketstackService(options, NullLogger<MarketstackService>.Instance);    
 ```
 
-GetExchanges:
+**GetExchanges:**
 ```c#
     var exchanges = await marketstackService.GetExchanges().ToListAsync();
 ```
 
-GetExchangeStocks:
+**GetExchangeStocks:**
 ```c#
     var nasdaqMic = "XNAS";
     var stocks = await _marketstackService.GetExchangeStocks(nasdaqMic)
@@ -46,7 +36,7 @@ GetExchangeStocks:
                 .ToListAsync();
 ```    
     
-GetStockEodBars:
+**GetStockEodBars:**
 ```c#
     var appleSymbol = "AAPL";
     var fromDate = DateTime.Now.AddDays(-200);
@@ -54,7 +44,6 @@ GetStockEodBars:
     var bars = await _marketstackService.GetStockEodBars(appleSymbol, fromDate, toDate)
         .ToListAsync();       
 ```
-
 
 ## Legal
 
