@@ -12,9 +12,11 @@ namespace Marketstack.Tests
     public class MarketstackServiceTests
     {
         private readonly IMarketstackService _marketstackService;
+        private const string apiKeyVariable = "ASPNETCORE_MarketstackApiToken";
         public MarketstackServiceTests()
         {
-            var options = Options.Create(new MarketstackOptions() { ApiToken = "a49b6cfd943daff80bfd2d5103d787fb"});
+            var apiKey = Environment.GetEnvironmentVariable(apiKeyVariable, EnvironmentVariableTarget.Machine);
+            var options = Options.Create(new MarketstackOptions() { ApiToken = apiKey });
             _marketstackService = new MarketstackService(options, NullLogger<MarketstackService>.Instance);
         }
 

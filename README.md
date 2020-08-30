@@ -45,6 +45,14 @@ An in-depth API documentation, including interactive code examples and extensive
         .ToListAsync();       
 ```
 
+## Tests
+
+Before running the tests, the ApiToken should be set using: 
+
+```
+setx ASPNETCORE_MarketstackApiToken {Your_Api_Token} /M
+```
+
 ## Legal
 
 All usage of the marketstack website, API, and services is subject to the [marketstack Terms & Conditions](https://marketstack.com/terms) and all annexed legal documents and agreements.
