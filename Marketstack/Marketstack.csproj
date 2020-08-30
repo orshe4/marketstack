@@ -2,6 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
+    <Authors>orshe4</Authors>
+    <Company>orshe4</Company>
+    <Description>Marketstack client.
+Marketstack is a JSON-based REST API for real-time, intraday and historical stock market data, supporting 125,000+ stock ticker symbols from 72+ worldwide stock exchanges.</Description>
+    <PackageProjectUrl>https://github.com/orshe4/marketstack</PackageProjectUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
