@@ -19,7 +19,7 @@ An in-depth API documentation, including interactive code examples and extensive
 
 **Initialize MarketstackService:**
 ```c#
-    var options = Options.Create(new MarketstackOptions() { ApiToken = "a49b6cfd943daff80bfd2d5103d787fb"});
+    var options = Options.Create(new MarketstackOptions() { ApiToken = "apiToken"});
     var marketstackService = new MarketstackService(options, NullLogger<MarketstackService>.Instance);    
 ```
 
