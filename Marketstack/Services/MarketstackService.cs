@@ -23,7 +23,15 @@ namespace Marketstack.Services
                                   ILogger<MarketstackService> logger)
         {
             _options = options.Value;
-            _throttled = new Throttled(_options.MaxRequestsPerSecond / 10, 100);
+            if(_options.MaxRequestsPerSecond >= 10)
+            {
+                _throttled = new Throttled(_options.MaxRequestsPerSecond / 10, 100);
+            }
+            else
+            {
+                _throttled = new Throttled(_options.MaxRequestsPerSecond, 1000);
+            }
+            
             _httpClient = httpClient;
             _httpClient.Timeout = TimeSpan.FromMinutes(10);
             _logger = logger;                        

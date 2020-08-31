@@ -18,7 +18,7 @@ namespace Marketstack.Services
             var query = HttpUtility.ParseQueryString(builder.Query);
             query["access_key"] = apiToken;
             builder.Query = query.ToString();
-            var pageResponse = await throttled.Run( () => httpClient.GetNextPageResponse<T>(builder, null));
+            var pageResponse = await throttled.Run(() => httpClient.GetNextPageResponse<T>(builder, null));
 
             while (pageResponse != null)
             {
