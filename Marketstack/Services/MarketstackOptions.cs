@@ -2,6 +2,7 @@
 {
     public class MarketstackOptions
     {
-        public string ApiToken { get; set; }             
+        public string ApiToken { get; set; }    
+        public int MaxRequestsPerSecond { get; set; }
     }
 }

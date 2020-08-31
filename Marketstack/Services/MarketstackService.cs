@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using Marketstack.Entities.Stocks;
 using System.Linq;
+using Throttling;
 
 namespace Marketstack.Services
 {
@@ -14,13 +15,15 @@ namespace Marketstack.Services
     {
         private readonly MarketstackOptions _options;        
         private readonly HttpClient _httpClient;
+        private readonly Throttled _throttled;
         private readonly ILogger<MarketstackService> _logger;
 
         public MarketstackService(IOptions<MarketstackOptions> options,
                                   HttpClient httpClient,
                                   ILogger<MarketstackService> logger)
         {
-            _options = options.Value;            
+            _options = options.Value;
+            _throttled = new Throttled(_options.MaxRequestsPerSecond / 10, 100);
             _httpClient = httpClient;
             _httpClient.Timeout = TimeSpan.FromMinutes(10);
             _logger = logger;                        

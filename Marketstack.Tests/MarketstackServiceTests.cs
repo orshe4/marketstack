@@ -16,7 +16,7 @@ namespace Marketstack.Tests
         public MarketstackServiceTests()
         {
             var apiKey = Environment.GetEnvironmentVariable(apiKeyVariable, EnvironmentVariableTarget.Machine);
-            var options = Options.Create(new MarketstackOptions() { ApiToken = apiKey });
+            var options = Options.Create(new MarketstackOptions() { ApiToken = apiKey, MaxRequestsPerSecond = 10 });
             _marketstackService = new MarketstackService(options, NullLogger<MarketstackService>.Instance);
         }
 
