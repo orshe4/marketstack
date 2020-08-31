@@ -8,8 +8,9 @@
 Marketstack is a JSON-based REST API for real-time, intraday and historical stock market data, supporting 125,000+ stock ticker symbols from 72+ worldwide stock exchanges.</Description>
     <PackageProjectUrl>https://github.com/orshe4/marketstack</PackageProjectUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <AssemblyVersion>1.0.0.1</AssemblyVersion>
-    <FileVersion>1.0.0.1</FileVersion>
+    <AssemblyVersion>1.0.1.0</AssemblyVersion>
+    <FileVersion>1.0.1.0</FileVersion>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>

@@ -4,21 +4,21 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
-
 using System.Threading.Tasks;
 using System.Web;
+using Throttling;
 
 namespace Marketstack.Services
 {
-    public static class HttpClientExtensions
+    internal static class HttpClientExtensions
     {
-        public static async IAsyncEnumerable<T> GetAsync<T>(this HttpClient httpClient, string url, string apiToken)
+        public static async IAsyncEnumerable<T> GetAsync<T>(this HttpClient httpClient, string url, string apiToken, Throttled throttled)
         {
             var builder = new UriBuilder(url);
             var query = HttpUtility.ParseQueryString(builder.Query);
             query["access_key"] = apiToken;
             builder.Query = query.ToString();
-            var pageResponse = await httpClient.GetNextPageResponse<T>(builder, null);
+            var pageResponse = await throttled.Run( () => httpClient.GetNextPageResponse<T>(builder, null));
 
             while (pageResponse != null)
             {
@@ -27,7 +27,7 @@ namespace Marketstack.Services
                     yield return item;
                 }
 
-                pageResponse = await httpClient.GetNextPageResponse(builder, pageResponse);
+                pageResponse = await throttled.Run(() => httpClient.GetNextPageResponse(builder, pageResponse));
             }
         }
 

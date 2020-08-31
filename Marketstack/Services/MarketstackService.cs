@@ -36,19 +36,19 @@ namespace Marketstack.Services
         
         public IAsyncEnumerable<Exchange> GetExchanges()
         {            
-            return _httpClient.GetAsync<Exchange>("http://api.marketstack.com/v1/exchanges", _options.ApiToken);
+            return _httpClient.GetAsync<Exchange>("http://api.marketstack.com/v1/exchanges", _options.ApiToken, _throttled);
         }
 
         public IAsyncEnumerable<Stock> GetExchangeStocks(string exchangeMic)
         {
-            return _httpClient.GetAsync<Stock>($"http://api.marketstack.com/v1/tickers?exchange={exchangeMic}", _options.ApiToken);                                
+            return _httpClient.GetAsync<Stock>($"http://api.marketstack.com/v1/tickers?exchange={exchangeMic}", _options.ApiToken, _throttled);                                
         }
 
         public IAsyncEnumerable<StockBar> GetStockEodBars(string stockSymbol, DateTime fromDate, DateTime toDate)
         {
             string dateFromStr = fromDate.ToString("yyyy-MM-dd");
             string dateToStr = toDate.ToString("yyyy-MM-dd");
-            return _httpClient.GetAsync<StockBar>($"http://api.marketstack.com/v1/eod?symbols={stockSymbol}&date_from={dateFromStr}&date_to={dateToStr}", _options.ApiToken);
+            return _httpClient.GetAsync<StockBar>($"http://api.marketstack.com/v1/eod?symbols={stockSymbol}&date_from={dateFromStr}&date_to={dateToStr}", _options.ApiToken, _throttled);
         }
     }
 }
