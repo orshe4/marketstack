@@ -48,5 +48,17 @@ namespace Marketstack.Tests
             Assert.NotEmpty(bars);
             Assert.True(bars.Count > 100);
         }
+
+        [Fact]
+        public async Task GetStockIntraydayBars_ReturnsBars()
+        {
+            var appleSymbol = "AAPL";
+            var fromDate = DateTime.Now.AddDays(-5);
+            var toDate = DateTime.Now;
+            var bars = await _marketstackService.GetStockIntraDayBars(appleSymbol, fromDate, toDate)
+                .ToListAsync();
+            Assert.NotEmpty(bars);
+            Assert.True(bars.Count > 10);
+        }
     }
 }
