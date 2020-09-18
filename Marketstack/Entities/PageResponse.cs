@@ -11,5 +11,15 @@ namespace Marketstack.Entities
 
         public bool IsLastResponse => Pagination.Count < Pagination.Limit;
         public int NextOffset => IsLastResponse ? throw new InvalidOperationException() : Pagination.Offset + Pagination.Count;
+
+        public List<int> AllRequestOffsets()
+        {
+            var offsets = new List<int>();
+            for (int i = 100; i < Pagination.Total; i+=MaxLimit)
+            {
+                offsets.Add(i);
+            }
+            return offsets;
+        }
     }
 }
