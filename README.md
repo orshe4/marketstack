@@ -45,7 +45,7 @@ An in-depth API documentation, including interactive code examples and extensive
 ```
 **Parallel Requests:**
 
-Parallel Requests: Parallel requests are supported using the [Throttling Libary](https://github.com/orshe4/Throttling) that allows to limit the number of requests per second.
+Parallel requests are supported using the [Throttling Libary](https://github.com/orshe4/Throttling) that allows limiting the number of requests per second.
 
 ```c#
     var options = Options.Create(new MarketstackOptions() { ApiToken = apiKey, MaxRequestsPerSecond = 3, Https = true });
