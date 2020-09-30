@@ -1,4 +1,6 @@
 # marketstack API
+[![NuGet version (Marketstack)](https://img.shields.io/nuget/v/Marketstack.svg?style=flat-square)](https://www.nuget.org/packages/Marketstack/)
+
 
 [marketstack](https://marketstack.com) is a JSON-based REST API for real-time, intraday and historical stock market data, supporting 125,000+ stock ticker symbols from 72+ worldwide stock exchanges. The API was built upon powerful apilayer cloud infrastructure, handling any volume with ease - from a few API requests per day all the way to millions of calls per minute.
 
