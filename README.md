@@ -27,15 +27,13 @@ An in-depth API documentation, including interactive code examples and extensive
 
 **GetExchanges:**
 ```c#
-    var exchanges = await marketstackService.GetExchanges().ToListAsync();
+    var exchanges = await marketstackService.GetExchanges();
 ```
 
 **GetExchangeStocks:**
 ```c#
     var nasdaqMic = "XNAS";
-    var stocks = await marketstackService.GetExchangeStocks(nasdaqMic)
-                .Take(400)
-                .ToListAsync();
+    var stocks = await marketstackService.GetExchangeStocks(nasdaqMic);
 ```    
     
 **GetStockEodBars:**
@@ -43,8 +41,19 @@ An in-depth API documentation, including interactive code examples and extensive
     var appleSymbol = "AAPL";
     var fromDate = DateTime.Now.AddDays(-200);
     var toDate = DateTime.Now;
-    var bars = await marketstackService.GetStockEodBars(appleSymbol, fromDate, toDate)
-        .ToListAsync();       
+    var bars = await marketstackService.GetStockEodBars(appleSymbol, fromDate, toDate);      
+```
+**Parallel Requests:**
+Parallel Requests: Parallel requests are supported using the [Throttling Libary](https://github.com/orshe4/Throttling) that allows to limit the number of requests per second.
+
+```c#
+    var options = Options.Create(new MarketstackOptions() { ApiToken = apiKey, MaxRequestsPerSecond = 3, Https = true });
+    var marketstackService = new MarketstackService(options, NullLogger<MarketstackService>.Instance);
+    List<string> symbols = new List<string>() { "AAPL", "MSFT", "GOOG", "VOD", "NVDA", "NFLX", "PEP", "NOW", "VEEV", "MOH" };
+    var fromDate = new DateTime(2017, 9, 1);
+    var toDate = DateTime.Now;
+    var tasks = symbols.Select(async (symbol) => await marketstackService.GetStockEodBars(symbol, fromDate, toDate));
+    var stocksBars = await Task.WhenAll(tasks);
 ```
 
 ## Tests
