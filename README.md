@@ -44,6 +44,7 @@ An in-depth API documentation, including interactive code examples and extensive
     var bars = await marketstackService.GetStockEodBars(appleSymbol, fromDate, toDate);      
 ```
 **Parallel Requests:**
+
 Parallel Requests: Parallel requests are supported using the [Throttling Libary](https://github.com/orshe4/Throttling) that allows to limit the number of requests per second.
 
 ```c#
