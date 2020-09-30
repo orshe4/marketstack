@@ -33,7 +33,7 @@ namespace Marketstack.Tests
         {
             var nasdaqMic = "XNAS";
             var stocks = await _marketstackService.GetExchangeStocks(nasdaqMic);                
-            Assert.True(stocks.Count == 1000);
+            Assert.True(stocks.Count > 1000);
         }
 
         [Fact]
@@ -53,7 +53,6 @@ namespace Marketstack.Tests
         public async Task GetStockEodBars_Parallel_ReturnsBars()
         {
             // 10 stocks
-            // 
             List<string> symbols = new List<string>() { "AAPL", "MSFT", "GOOG", "VOD", "NVDA", "NFLX", "PEP", "NOW", "VEEV", "MOH" };
             var fromDate = new DateTime(2017, 9, 1);
             var toDate = DateTime.Now;
@@ -61,6 +60,17 @@ namespace Marketstack.Tests
             var stocksBars = await Task.WhenAll(tasks);
 
             Assert.True(symbols.Count == stocksBars.Length);
+        }
+
+        [Fact]
+        public async Task GetStockIntraydayBars_ReturnsBars()
+        {
+            var appleSymbol = "AAPL";
+            var fromDate = DateTime.Now.AddDays(-5);
+            var toDate = DateTime.Now;
+            var bars = await _marketstackService.GetStockIntraDayBars(appleSymbol, fromDate, toDate);                
+            Assert.NotEmpty(bars);
+            Assert.True(bars.Count > 10);
         }
     }
 }
