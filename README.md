@@ -1,4 +1,4 @@
-# marketstack API
+# .NET Marketstack API
 [![NuGet version (Marketstack)](https://img.shields.io/nuget/v/Marketstack.svg?style=flat-square)](https://www.nuget.org/packages/Marketstack/)
 
 
