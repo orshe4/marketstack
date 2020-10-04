@@ -3,9 +3,13 @@ using System.Collections.Generic;
 
 namespace Marketstack.Entities
 {
-    internal class PageResponse<T>
+    internal static class PageResponse
     {
-        public const int MaxLimit = 100;
+        public const int MaxLimit = 1000;
+    }
+
+    internal class PageResponse<T>
+    {        
         public Pagination Pagination { get; set; }
         public List<T> Data { get; set; }
 
@@ -15,7 +19,7 @@ namespace Marketstack.Entities
         public List<int> AllRequestOffsets()
         {
             var offsets = new List<int>();
-            for (int i = 100; i < Pagination.Total; i+=MaxLimit)
+            for (int i = Pagination.Offset + PageResponse.MaxLimit; i < Pagination.Total; i+= PageResponse.MaxLimit)
             {
                 offsets.Add(i);
             }
