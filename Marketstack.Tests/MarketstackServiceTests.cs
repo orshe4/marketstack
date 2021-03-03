@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Marketstack.Entities.Enums;
+using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using Xunit;
 
 namespace Marketstack.Tests
@@ -66,11 +68,25 @@ namespace Marketstack.Tests
         public async Task GetStockIntraydayBars_ReturnsBars()
         {
             var appleSymbol = "AAPL";
-            var fromDate = DateTime.Now.AddDays(-5);
-            var toDate = DateTime.Now;
+            var fromDate = DateTime.Parse("2021-02-01");
+            var toDate = DateTime.Parse("2021-02-02");
             var bars = await _marketstackService.GetStockIntraDayBars(appleSymbol, fromDate, toDate);                
             Assert.NotEmpty(bars);
-            Assert.True(bars.Count > 10);
+            Assert.Equal(7, bars.Count);
+        }
+
+        [Theory]
+        [InlineData(Interval._15min, 23)]
+        [InlineData(Interval._30min, 11)]
+        [InlineData(Interval._3hour, 2)]
+        public async Task GetStockIntraydayBars_WithInterval_ReturnsBars(Interval interval, int expected)
+        {
+            var appleSymbol = "AAPL";
+            var fromDate = DateTime.Parse("2021-02-01");
+            var toDate = DateTime.Parse("2021-02-02");
+            var bars = await _marketstackService.GetStockIntraDayBars(appleSymbol, fromDate, toDate, interval);                
+            Assert.NotEmpty(bars);
+            Assert.Equal(expected, bars.Count);
         }
     }
 }
